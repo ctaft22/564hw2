@@ -1,6 +1,6 @@
 -- drop table if exists Items
 drop table if exists categories;
--- drop table if exists Users
+drop table if exists Users
 -- drop table if exists Bids
 
 -- create table Items(
@@ -20,9 +20,9 @@ CREATE TABLE categories (
     category TEXT,
 );
 
--- create table Users(
---     userID Char(max),
---     rating int, 
---     location Char(max),
---     country Char(max),
--- );
+create table Users(
+     userID TEXT,
+     rating INTEGER, 
+     location TEXT,
+     country TEXT,
+);
