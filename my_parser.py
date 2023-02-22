@@ -84,7 +84,7 @@ def itemsTable(item):
     num_bid = item["Number_of_Bids"]
     started = transformDttm(item["Started"])
     ends = transformDttm( item["Ends"])
-    description = item["Description"]
+    description = item["Description"].replace('"', '\"\"')
     if (description == None):
         description = "NULL"
     seller_id = item["Seller"]["UserID"]
@@ -109,8 +109,18 @@ go through item and organize by userid time amount
 """
 def bidsTable(item):
     item_id = item["ItemID"]
+    num_bid = int(item["Number_of_Bids"])
+    if (num_bid == 0) :
+        return ""
+    all_bids = ""
+    for i in range(num_bid):
+        buyerinfo = item["Bids"][i]["Bid"]
+        b_id = buyerinfo["Bidder"]["UserID"]
+        b_time = transformDttm(buyerinfo["Time"])
+        b_amount = transformDollar(buyerinfo["Amount"])
+        all_bids = all_bids + "|" + b_id + "|" + b_time + "|" + b_amount + "\n"
 
-    pass
+    return all_bids
 
 """
 go through item and organize by userid location country and rating
@@ -119,7 +129,7 @@ def userTable(item):
     seller = item["Seller"]["UserID"]
     s_rating = item["Seller"]["Rating"]
     s_country = item["Country"]
-    s_location = item["Location"]
+    s_location = item["Location"].replace('"', '\"\"')
     all_user = seller + "|" + s_rating + "|" + s_location + "|" + s_country + "\n"
 
     num_bid = int(item["Number_of_Bids"])
@@ -132,7 +142,7 @@ def userTable(item):
         b_id = buyerinfo["UserID"]
         b_rating = buyerinfo["Rating"]
         if ("Location" in buyerinfo.keys()) :
-            b_location = buyerinfo["Location"]
+            b_location = buyerinfo["Location"].replace('"', '\"\"')
         else:
             b_location = "NULL"
         if ("Country" in buyerinfo.keys()):
@@ -154,6 +164,7 @@ def parseJson(json_file):
         categoriesfile = open("categories.dat", "w")
         itemsfile = open("items.dat", "w")
         usersfile = open("users.dat", "w")
+        bidsfile = open("bids.dat", "w")
         items = loads(f.read())['Items'] # creates a Python dictionary of Items for the supplied json file
         for item in items:
             """
@@ -165,12 +176,14 @@ def parseJson(json_file):
             itemsfile.write(itemsTable(item))
             usersfile.write(userTable(item))
             categoriesfile.write(categoriesTable(item))
+            bidsfile.write(bidsTable(item))
 
 
             pass
         itemsfile.close()
         usersfile.close()
         categoriesfile.close()
+        bidsfile.close()
 
 """
 Loops through each json files provided on the command line and passes each file
@@ -184,7 +197,7 @@ def main(argv):
     for f in argv[1:]:
         if isJson(f):
             parseJson(f)
-            print "Success parsing " + f
+            print("Success parsing " + f)
 
 if __name__ == '__main__':
     main(sys.argv)
