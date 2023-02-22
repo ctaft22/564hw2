@@ -1,3 +1,3 @@
-SELECT count(*) 
+SELECT count(*)
 FROM Users
-WHERE 'New York' in Users.location
+WHERE 'New York' = Users.location

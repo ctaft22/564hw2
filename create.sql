@@ -22,7 +22,7 @@ CREATE TABLE BIDS(
     bidAmount FLOAT
 );
 CREATE TABLE Users(
-    userID TEXT,
+    userID TEXT ,
     rating INTEGER, 
     location TEXT,
     country TEXT
