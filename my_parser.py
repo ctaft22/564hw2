@@ -120,7 +120,7 @@ def bidsTable(item):
         b_id = buyerinfo["Bidder"]["UserID"]
         b_time = transformDttm(buyerinfo["Time"])
         b_amount = transformDollar(buyerinfo["Amount"])
-        all_bids = all_bids + "|\"" + b_id + "\"|" + b_time + "|" + b_amount + "\n"
+        all_bids = all_bids + "\"" + b_id + "\"|" + b_time + "|" + b_amount + "\n"
 
     return all_bids
 

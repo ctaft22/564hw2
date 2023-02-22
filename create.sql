@@ -15,15 +15,19 @@ CREATE TABLE Items(
     description TEXT,
     sellerID INTEGER
 );
-
-CREATE TABLE Categories (
-    item_ID INTEGER, 
-    category TEXT,
+CREATE TABLE BIDS(
+    userID TEXT,
+    bidTime TEXT,
+    bidAmount FLOAT
 );
-
 CREATE TABLE Users(
-     userID TEXT PRIMARY KEY,
-     rating INTEGER, 
-     location TEXT,
-     country TEXT,
+    userID TEXT,
+    rating INTEGER, 
+    location TEXT,
+    country TEXT
 );
+CREATE TABLE Categories(
+    itemID INTEGER,
+    category Float
+);
+
