@@ -73,7 +73,7 @@ go through item and organize by item_id, name, currently, buyprice, firstbid, nu
 """
 def itemsTable(item):
     item_id = item["ItemID"]
-    name = item["Name"]
+    name = item["Name"].replace('"', '\"\"')
     currently = transformDollar(item["Currently"])
     
     if ("Buy_Price" in item.keys()):
