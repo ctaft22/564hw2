@@ -163,7 +163,7 @@ of the necessary SQL tables for your database.
 """
 def parseJson(json_file):
     with open(json_file, 'r') as f:
-        categoriesfile = open("dups_categories.dat", "w")
+        categoriesfile = open("dups_categories.dat", "a")
         itemsfile = open("dups_items.dat", "a")
         usersfile = open("dups_users.dat", "a")
         bidsfile = open("dups_bids.dat", "a")

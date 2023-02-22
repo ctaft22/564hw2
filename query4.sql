@@ -1,0 +1,4 @@
+SELECT itemID
+FROM Items
+ORDER BY currently DESC
+LIMIT 1
