@@ -6,7 +6,7 @@ drop TABLE if exists Bids;
 CREATE TABLE Items(
     itemID INTEGER PRIMARY KEY,
     itemName TEXT,
-    currently TEXT,
+    currently FLOAT,
     buyPrice FLOAT,
     firstBid FLOAT,
     numBid INTEGER, 
@@ -16,6 +16,7 @@ CREATE TABLE Items(
     sellerID INTEGER
 );
 CREATE TABLE BIDS(
+    itemID INTEGER,
     userID TEXT,
     bidTime TEXT,
     bidAmount FLOAT

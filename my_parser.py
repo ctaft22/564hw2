@@ -101,6 +101,7 @@ def categoriesTable(item):
     item_id = item["ItemID"]
     categories = item["Category"]
     all_categories = ""
+    print(len(categories))
     for i in range(len(categories)):
         all_categories = all_categories + item_id + "|\"" + categories[i] + "\"\n"
     return all_categories
@@ -120,7 +121,7 @@ def bidsTable(item):
         b_id = buyerinfo["Bidder"]["UserID"]
         b_time = transformDttm(buyerinfo["Time"])
         b_amount = transformDollar(buyerinfo["Amount"])
-        all_bids = all_bids + "\"" + b_id + "\"|" + b_time + "|" + b_amount + "\n"
+        all_bids = all_bids + item_id + "|\"" + b_id + "\"|" + b_time + "|" + b_amount + "\n"
 
     return all_bids
 
@@ -163,7 +164,7 @@ of the necessary SQL tables for your database.
 """
 def parseJson(json_file):
     with open(json_file, 'r') as f:
-        categoriesfile = open("dups_categories.dat", "w")
+        categoriesfile = open("dups_categories.dat", "a")
         itemsfile = open("dups_items.dat", "a")
         usersfile = open("dups_users.dat", "a")
         bidsfile = open("dups_bids.dat", "a")
