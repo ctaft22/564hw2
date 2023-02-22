@@ -84,11 +84,13 @@ def itemsTable(item):
     num_bid = item["Number_of_Bids"]
     started = transformDttm(item["Started"])
     ends = transformDttm( item["Ends"])
-    description = item["Description"].replace('"', '\"\"')
+    description = item["Description"]
     if (description == None):
         description = "NULL"
+    else:
+        description = description.replace('"', '\"\"')
     seller_id = item["Seller"]["UserID"]
-    item_parsed = item_id + "|" + name + "|" + currently + "|" + buyprice  + "|" + firstbid + "|" + num_bid + "|" + started + "|" + ends + "|" + description + "|" + seller_id + "\n"
+    item_parsed = item_id + "|\"" + name + "\"|" + currently + "|" + buyprice  + "|" + firstbid + "|" + num_bid + "|" + started + "|" + ends + "|\"" + description + "\"|\"" + seller_id + "\"\n"
 
     return item_parsed
 
@@ -100,7 +102,7 @@ def categoriesTable(item):
     categories = item["Category"]
     all_categories = ""
     for i in range(len(categories)):
-        all_categories = all_categories + item_id + "|" + categories[i] + "\n"
+        all_categories = all_categories + item_id + "|\"" + categories[i] + "\"\n"
     return all_categories
 
 
@@ -118,7 +120,7 @@ def bidsTable(item):
         b_id = buyerinfo["Bidder"]["UserID"]
         b_time = transformDttm(buyerinfo["Time"])
         b_amount = transformDollar(buyerinfo["Amount"])
-        all_bids = all_bids + "|" + b_id + "|" + b_time + "|" + b_amount + "\n"
+        all_bids = all_bids + "|\"" + b_id + "\"|" + b_time + "|" + b_amount + "\n"
 
     return all_bids
 
@@ -130,7 +132,7 @@ def userTable(item):
     s_rating = item["Seller"]["Rating"]
     s_country = item["Country"]
     s_location = item["Location"].replace('"', '\"\"')
-    all_user = seller + "|" + s_rating + "|" + s_location + "|" + s_country + "\n"
+    all_user ="\"" + seller + "\"|" + s_rating + "|\"" + s_location + "\"|\"" + s_country + "\"\n"
 
     num_bid = int(item["Number_of_Bids"])
     
@@ -149,7 +151,7 @@ def userTable(item):
             b_country = buyerinfo["Country"]
         else:
             b_country = "NULL"
-        all_user = all_user + b_id + "|" + b_rating + "|" + b_location + "|" + b_country + "\n"
+        all_user = all_user +"\"" + b_id + "\"|" + b_rating + "|\"" + b_location + "\"|\"" + b_country + "\"\n"
     return all_user
 
 
