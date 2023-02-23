@@ -101,7 +101,6 @@ def categoriesTable(item):
     item_id = item["ItemID"]
     categories = item["Category"]
     all_categories = ""
-    print(len(categories))
     for i in range(len(categories)):
         all_categories = all_categories + item_id + "|\"" + categories[i] + "\"\n"
     return all_categories
